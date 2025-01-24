@@ -2,8 +2,8 @@ const mineflayer = require('mineflayer');
 const http = require('http');
 
 // Define the server IP and port
-const serverIP = 'infinityvelocity.falixsrv.me';  // Corrected IP from your original code
-const serverPort = 31706;
+const serverIP = 'infinitesmpvelocity.falixsrv.me';  // Corrected IP from your original code
+const serverPort = 29167;
 const version = '1.20.2';
 
 // Function to create and handle a bot
@@ -18,16 +18,13 @@ function createBot(username) {
     bot.on('spawn', () => {
         console.log(`${username} has joined the server!`);
 
-        // Send the "/server survival" command to switch to the survival server
-        bot.chat('/server survival');
-
         // Leave the server after 3 minutes
         setTimeout(() => {
             if (bot) {
                 console.log(`${username} is leaving the server!`);
                 bot.quit();
             }
-        }, 3 * 60 * 1000); // 3 minutes
+        }, 30 * 60 * 1000); // 30 minutes
     });
 
     bot.on('chat', (username, message) => {
@@ -46,32 +43,26 @@ function createBot(username) {
         // Reconnect the bot after 1 minute
         setTimeout(() => {
             createBot(username); // Recreate the bot after 1 minute
-        }, 60000); // Wait for 1 minute before rejoining
+        }, 600000); // Wait for 10 minute before rejoining
     });
 
     return bot;
 }
 
-// Cycle for ServerManager1: Joins for 3 minutes, leaves for 1 minute
-function serverManager1Cycle() {
-    const bot = createBot('ServerManager4');
-}
-
-// Cycle for ServerManager2: Joins for 3 minutes, leaves for 1 minute
-function serverManager2Cycle() {
-    const bot = createBot('ServerManager5');
-}
-
-// Cycle for ServerManager3: Joins for 3 minutes, leaves for 1 minute
+// Cycle for ServerManager1: Joins for 30 minutes, leaves for 10 minute
 function serverManager3Cycle() {
-    const bot = createBot('ServerManager6');
+    const bot = createBot('ServerManager3');
+}
+
+// Cycle for ServerManager2: Joins for 30 minutes, leaves for 10 minute
+function serverManager4Cycle() {
+    const bot = createBot('ServerManager4');
 }
 
 // Start all bot cycles with staggered start times
 function startBotCycles() {
     setTimeout(serverManager1Cycle, 0 * 60000); // ServerManager1 starts at 0 minutes
-    setTimeout(serverManager2Cycle, 1 * 60000); // ServerManager2 starts at 1 minute
-    setTimeout(serverManager3Cycle, 2 * 60000); // ServerManager3 starts at 2 minutes
+    setTimeout(serverManager2Cycle, 15 * 60000); // ServerManager2 starts at 15 minute
 }
 
 // Start the bot cycles
