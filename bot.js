@@ -18,6 +18,12 @@ function createBot(username) {
     bot.on('spawn', () => {
         console.log(`${username} has joined the server!`);
 
+        // Send the /server survival command after 2 seconds
+        setTimeout(() => {
+            bot.chat('/server survival');
+            console.log('Sent /server survival command');
+        }, 2000); // 2 seconds delay
+
         // Leave the server after 3 minutes
         setTimeout(() => {
             if (bot) {
@@ -49,20 +55,20 @@ function createBot(username) {
     return bot;
 }
 
-// Cycle for ServerManager1: Joins for 30 minutes, leaves for 10 minute
+// Cycle for ServerManager3: Joins for 30 minutes, leaves for 10 minute
 function serverManager3Cycle() {
     const bot = createBot('ServerManager3');
 }
 
-// Cycle for ServerManager2: Joins for 30 minutes, leaves for 10 minute
+// Cycle for ServerManager4: Joins for 30 minutes, leaves for 10 minute
 function serverManager4Cycle() {
     const bot = createBot('ServerManager4');
 }
 
 // Start all bot cycles with staggered start times
 function startBotCycles() {
-    setTimeout(serverManager1Cycle, 0 * 60000); // ServerManager1 starts at 0 minutes
-    setTimeout(serverManager2Cycle, 15 * 60000); // ServerManager2 starts at 15 minute
+    setTimeout(serverManager3Cycle, 0 * 60000); // ServerManager1 starts at 0 minutes
+    setTimeout(serverManager4Cycle, 15 * 60000); // ServerManager2 starts at 15 minute
 }
 
 // Start the bot cycles
